@@ -102,19 +102,22 @@ class RosNMEADriver(object):
             # RTK Fix
             4: [
                 self.default_epe_quality4,
-                NavSatStatus.STATUS_GBAS_FIX,
+                # NavSatStatus.STATUS_GBAS_FIX, #WHY?!!! I want to now if it is exactly RTK Fix.
+                4,
                 NavSatFix.COVARIANCE_TYPE_APPROXIMATED
             ],
             # RTK Float
             5: [
                 self.default_epe_quality5,
-                NavSatStatus.STATUS_GBAS_FIX,
+                # NavSatStatus.STATUS_GBAS_FIX,
+                5,
                 NavSatFix.COVARIANCE_TYPE_APPROXIMATED
             ],
             # WAAS
             9: [
                 self.default_epe_quality9,
-                NavSatStatus.STATUS_GBAS_FIX,
+                # NavSatStatus.STATUS_GBAS_FIX,
+                9,
                 NavSatFix.COVARIANCE_TYPE_APPROXIMATED
             ]
         }
@@ -161,7 +164,8 @@ class RosNMEADriver(object):
                 if math.isnan(data['utc_time'][0]):
                     rospy.logwarn("Time in the NMEA sentence is NOT valid")
                     return False
-                current_fix.header.stamp = rospy.Time(data['utc_time'][0], data['utc_time'][1])
+                current_fix.header.stamp = rospy.Time(
+                    data['utc_time'][0], data['utc_time'][1])
 
             fix_type = data['fix_type']
             if not (fix_type in self.gps_qualities):
@@ -237,7 +241,8 @@ class RosNMEADriver(object):
                 if math.isnan(data['utc_time'][0]):
                     rospy.logwarn("Time in the NMEA sentence is NOT valid")
                     return False
-                current_fix.header.stamp = rospy.Time(data['utc_time'][0], data['utc_time'][1])
+                current_fix.header.stamp = rospy.Time(
+                    data['utc_time'][0], data['utc_time'][1])
 
             # Only publish a fix from RMC if the use_RMC flag is set.
             if self.use_RMC:
