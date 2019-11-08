@@ -78,25 +78,29 @@ class RosNMEADriver(object):
             # Unknown
             -1: [
                 self.default_epe_quality0,
-                NavSatStatus.STATUS_NO_FIX,
+                # NavSatStatus.STATUS_NO_FIX,
+                -1,
                 NavSatFix.COVARIANCE_TYPE_UNKNOWN
             ],
             # Invalid
             0: [
                 self.default_epe_quality0,
-                NavSatStatus.STATUS_NO_FIX,
+                # NavSatStatus.STATUS_NO_FIX,
+                0,
                 NavSatFix.COVARIANCE_TYPE_UNKNOWN
             ],
             # SPS
             1: [
                 self.default_epe_quality1,
-                NavSatStatus.STATUS_FIX,
+                # NavSatStatus.STATUS_FIX,
+                1,
                 NavSatFix.COVARIANCE_TYPE_APPROXIMATED
             ],
             # DGPS
             2: [
                 self.default_epe_quality2,
-                NavSatStatus.STATUS_SBAS_FIX,
+                # NavSatStatus.STATUS_SBAS_FIX,
+                2,
                 NavSatFix.COVARIANCE_TYPE_APPROXIMATED
             ],
             # RTK Fix
