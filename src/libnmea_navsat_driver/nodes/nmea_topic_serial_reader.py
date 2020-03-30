@@ -58,7 +58,8 @@ def main():
             sentence.header.stamp = rospy.get_rostime()
             sentence.header.frame_id = frame_id
             sentence.sentence = data
-
+            # log the raw nmea (hope we will see some GGA)
+            rospy.loginfo_throttle(1, sentence)
             nmea_pub.publish(sentence)
 
     except rospy.ROSInterruptException:
